@@ -12,6 +12,7 @@ TREE_UPDATE = 50
 CLOUDS_UPDATE = 100
 FIRE_UPDATE = 50
 MAP_W, MAP_H = 20, 20
+BURN_PENALTY = 5
 SAVE_FILE = "save.json"
 
 # Игровые объекты
@@ -98,6 +99,10 @@ try:
             field.generate_tree()
         if tick % FIRE_UPDATE == 0:
             field.update_fires()
+            active_fires = field.count_active_fires()
+            field.update_fires()
+            if active_fires > 0:
+                helico.score = max(0, helico.score - active_fires * BURN_PENALTY)
         if tick % CLOUDS_UPDATE == 0:
             clouds.update()
         
