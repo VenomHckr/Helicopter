@@ -108,6 +108,15 @@ class Map:
                     self.cells[ri][ci] = 0
         for i in range(15):
             self.add_fire()
+            
+   #  количество активных пожаров 
+    def count_active_fires(self):
+        count = 0
+        for ri in range(self.h):
+            for ci in range(self.w):
+                if self.cells[ri][ci] == 5:  
+                    count += 1
+        return count
 
     #  состояние вертолета
     def process_helicopter(self, helico, clouds):
